@@ -3,7 +3,6 @@ var router = express.Router();
 var multer = require('multer');
 var upload = multer({dest: './upload/'});
 
-var sys = require('sys')
 var exec = require('child_process').exec;
 var child;
 
@@ -11,9 +10,8 @@ var child;
 router.post('/', upload.single('image'), function(req, res, next) {
 
   var command = ["avconv -i ../",req.file.path, "-vn -f wav ../upload/audio/", req.file.filename,".wav"].join('');
-  child = exec("pwd", function (error, stdout, stderr) {
-    sys.print('stdout: ' + stdout);
-    sys.print('stderr: ' + stderr);
+  child = exec(command, function (error, stdout, stderr) {
+    console.log(stdout);
     if (error !== null) {
       console.log('exec error: ' + error);
     }
