@@ -13,7 +13,7 @@ router.post('/', upload.single('image'), function(req, res, next) {
   child = exec(command, function (error, stdout, stderr) {
     console.log(stdout);
     var murl = ['http://159.122.249.236:3000/audio/',req.file.filename,'.wav'].join('')
-    request('http://romancl.eu-gb.mybluemix.net/recognize?url='+murl, function (e) {
+    request('http://romancl.eu-gb.mybluemix.net/recognize?url='+murl, function (error, response, body){
       if (!error && response.statusCode == 200) {
           res.json({url: murl});
       }
